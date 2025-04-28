@@ -1,21 +1,30 @@
-import React from "react";
+import React, {Component} from "react";
 import Grid from "../template/grid";
 import IconButton from "../template/iconButton.jsx";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { changeDescription } from "./todoActions.js";
+import { changeDescription, search } from "./todoActions.js";
 
-const TodoForm = props => {
 
-    const keyHandler = (e)=>{
+class TodoForm extends Component {
+    constructor(props){
+        super(props)
+        this.keyHandler = this.keyHandler.bind(this)
+    }
+
+    keyHandler(e) {
         if(e.key === "Enter"){
-            e.shiftKey ? props.handleSearch() : props.handleAdd
+            e.shiftKey ? this.props.handleSearch() : this.props.handleAdd
         } else if(e.key === "Escape") {
             props.handleClear()
         }
     }
 
-    return (
+    componentWillMount(){
+        this.props.search()
+    }
+
+    render(){
         <div role="form" className="todoForm">
             <div className="row">
                 <Grid cols="12 9 10">
@@ -33,12 +42,9 @@ const TodoForm = props => {
                 </Grid>
             </div>
         </div>
-    )
-
+    }
 }
 
-
-
 const mapStateToProps = state => ({description: state.todo.description})
-const mapDispatchToProps = dispatch => bindActionCreators({changeDescription}, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({changeDescription, search}, dispatch)
 export default connect(mapStateToProps, mapDispatchToProps(TodoForm))
