@@ -1,7 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import {createStore} from "redux"
+import {createStore, applyMiddleware} from "redux"
 import  {Provider} from "react-redux"
+import promise from "redux-promise"
 
 import App from "./app.jsx"
 import reducers from "reducers.js"
@@ -11,7 +12,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import '@fortawesome/fontawesome-free/css/all.min.css'
 
-const store = createStore(reducers)
+const store = applyMiddleware(promise)(createStore)(reducers)
 
 
 

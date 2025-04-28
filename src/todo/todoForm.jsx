@@ -8,7 +8,7 @@ import { changeDescription, search } from "./todoActions.js";
 
 class TodoForm extends Component {
     constructor(props){
-        super(props)
+        super(this.props)
         this.keyHandler = this.keyHandler.bind(this)
     }
 
@@ -29,16 +29,16 @@ class TodoForm extends Component {
             <div className="row">
                 <Grid cols="12 9 10">
                     <input type="text" className="form-control" id="description" placeholder="Adicione uma tarefa"
-                    value={props.description} onChange={props.changeDescription} onKeyUp={keyHandler}  />
+                    value={this.props.description} onChange={this.props.changeDescription} onKeyUp={this.keyHandler}  />
                 </Grid>
                     
     
                 <Grid cols="12 3 2">
-                    <IconButton style="primary" icon = "plus" onClick={props.handleAdd}>
+                    <IconButton style="primary" icon = "plus" onClick={this.props.handleAdd}>
                         <i className="fa fa-plus"></i>
                     </IconButton>
-                    <IconButton style="info" icon='search' onClick={props.handleSearch}></IconButton>
-                    <IconButton style="default" icon='close' onClick={props.handleClear}></IconButton>
+                    <IconButton style="info" icon='search' onClick={this.props.handleSearch}></IconButton>
+                    <IconButton style="default" icon='close' onClick={this.props.handleClear}></IconButton>
                 </Grid>
             </div>
         </div>
